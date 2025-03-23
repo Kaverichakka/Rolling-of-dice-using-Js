@@ -36,11 +36,17 @@
     <div class="dice" id="dice">🎲</div>
     <p class="instruction">Click on the dice to roll it!</p>
 
+      <audio id= 'dice-sound'src="./assets/dice-sound-288763.mp3"></audio> 
+
     <script>
         document.getElementById("dice").addEventListener("click", function() {
             const dice = document.getElementById("dice");
-            const diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+            const diceFaces = ["1", "2", "3", "4", "5", "6"];
             const colors = ["red", "blue", "green", "purple", "orange", "teal"];
+
+             let sound=document.getElementById('dice-sound')
+             sound.currentTime=1
+              sound.play()
 
             dice.style.pointerEvents = "none";
 
@@ -48,6 +54,7 @@
             let randomRotation = 360 * (Math.floor(Math.random() * 3) + 1);
             dice.style.transform =` rotate(${randomRotation}deg)`;
 
+        
             // Apply random color
             let randomColor = colors[Math.floor(Math.random() * colors.length)];
             dice.style.backgroundColor = randomColor;
