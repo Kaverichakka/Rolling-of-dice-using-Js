@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Rolling Dice</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .dice {
+            font-size: 100px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out, background-color 0.5s;
+            margin: 50px auto;
+            background-color: lightgray;
+            user-select: none;
+        }
+        .instruction {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click the Dice to Roll</h1>
+    <div class="dice" id="dice">🎲</div>
+    <p class="instruction">Click on the dice to roll it!</p>
+
+    <script>
+        document.getElementById("dice").addEventListener("click", function() {
+            const dice = document.getElementById("dice");
+            const diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+            const colors = ["red", "blue", "green", "purple", "orange", "teal"];
+
+            dice.style.pointerEvents = "none";
+
+            // Apply random rotation
+            let randomRotation = 360 * (Math.floor(Math.random() * 3) + 1);
+            dice.style.transform =` rotate(${randomRotation}deg)`;
+
+            // Apply random color
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            dice.style.backgroundColor = randomColor;
+
+            // Temporarily show a spinning dice (🎲) before showing result
+            dice.textContent = "🎲";
+
+            // After rotation delay, show random dice number
+            setTimeout(() => {
+                let randomNumber = Math.floor(Math.random() * 6); // 0 to 5
+                dice.textContent = diceFaces[randomNumber];
+
+                // Enable clicking again after roll
+                dice.style.pointerEvents = "auto";
+            }, 600);
+        });
+    </script>
+
+</body>
+</html>
+
+
